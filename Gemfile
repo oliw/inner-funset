@@ -7,6 +7,8 @@ ruby '2.6.2'
 gem 'rails', '~> 5.2.2'
 gem 'pg'
 gem 'sidekiq'
+gem "sidekiq-cron", "~> 1.1"
+gem "faraday", "~> 0.15.4"
 gem 'griddler'
 gem 'griddler-sendgrid'
 # Use Puma as the app server
