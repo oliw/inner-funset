@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   postgres:
     image: postgres
@@ -21,6 +21,10 @@ services:
     links:
       - postgres
       - redis
+  mail-catcher:
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080"
   worker:
     env_file:
       - .env.dev-docker

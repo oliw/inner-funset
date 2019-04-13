@@ -7,6 +7,7 @@ class WelcomeController < ApplicationController
     @neighbor = Neighbor.new(neighbor_params)
     @neighbor.signed_up_at = Time.current
     @neighbor.save!
+    WelcomeMailer.with(neighbor: @neighbor).welcome_email.deliver_later
     flash[:notice] = "Thanks for signing up!"
     redirect_to :root
   end
