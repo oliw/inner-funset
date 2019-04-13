@@ -6,7 +6,8 @@ RUN apk add --no-cache \
   build-base \
   sqlite-dev \
   nodejs \
-  postgresql-dev
+  postgresql-dev \
+  yarn
 
 RUN mkdir -p /app
 WORKDIR /app

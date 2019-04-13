@@ -1,5 +1,14 @@
 {
   "name": "inner-funset",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@rails/activestorage": "^6.0.0-alpha",
+    "@rails/ujs": "^6.0.0-alpha",
+    "@rails/webpacker": "^4.0.2",
+    "tailwindcss": "^0.7.4",
+    "turbolinks": "^5.2.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.3.1"
+  }
 }
