@@ -7,6 +7,6 @@ class WelcomeMailerPreview < ActionMailer::Preview
   private
 
   def dummy_neighbor
-    Neighbor.new(name: "Oli", email: "oli@wilkie.com", description: "Hi there!", signed_up_at: Time.current)
+    Neighbor.new(name: "Oli", email: "oli@wilkie.com", token: SecureRandom.uuid, description: "Hi there!", signed_up_at: Time.current)
   end
 end

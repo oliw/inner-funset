@@ -9,5 +9,8 @@
 
   <body>
     <%= yield %>
+    <footer>
+      <%= link_to "Unsubscribe", unsubscribe_path(token: @neighbor.token) %>
+    </footer>
   </body>
 </html>

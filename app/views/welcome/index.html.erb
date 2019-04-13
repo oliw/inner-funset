@@ -5,7 +5,7 @@
 <% end %>
 
 <p>Join us!</p>
-<%= form_for @neighbor, url: {action: "create"} do |neighbor_form| %>
+<%= form_for @neighbor, url: welcome_index_path do |neighbor_form| %>
   <%= neighbor_form.text_field :name, placeholder: "Name" %>
   <%= neighbor_form.email_field :email, placeholder: "Email" %>
   <%= neighbor_form.text_area :description, placeholder: "About Yourself" %>
