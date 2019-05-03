@@ -46,6 +46,8 @@ class SignupForm extends React.Component {
   renderFirstPage() {
     return (
       <React.Fragment>
+        <h1>Monthly opportunities to meet more locals</h1>
+
         <form>
           <div>
             <label>
@@ -59,20 +61,31 @@ class SignupForm extends React.Component {
             </label>
           </div>
           <div>
-            <label>
-              Would you prefer to grab:
-              <select
-                value={this.state.preference}
-                onChange={this.handleChange}
+            <p>What would you prefer to grab?</p>
+          </div>
+          <div class="inline-block relative w-64">
+            <select class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+              <option value="coffee">Coffee at Beanery</option>
+              <option value="beer">Drinks at the Shamrock</option>
+              <option value="any">No preference!</option>
+            </select>
+            <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+              <svg
+                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
               >
-                <option value="coffee">Coffee at Beanery</option>
-                <option value="beer">Drinks at the Shamrock</option>
-                <option value="any">No preference!</option>
-              </select>
-            </label>
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg>
+            </div>
           </div>
         </form>
-        <button onClick={this.togglePage}>Continue</button>
+        <button
+          className="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 border border-blue-darker rounded"
+          onClick={this.togglePage}
+        >
+          Continue
+        </button>
       </React.Fragment>
     );
   }
@@ -90,24 +103,52 @@ class SignupForm extends React.Component {
           We won't share your email address with anyone, even the neighbors you
           match with. You can decide how much you share.
         </p>
-        <form onSubmit={this.handleSubmit}>
+        <form className="mt-8" onSubmit={this.handleSubmit}>
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label
+                class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+                for="grid-first-name"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                placeholder="Jane"
+                required
+                value={this.state.name}
+                onChange={this.handleNameChange}
+              />
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+              <label
+                class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+                for="grid-last-name"
+              >
+                Email
+              </label>
+              <input
+                className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                type="email"
+                required
+                placeholder="jane@gmail.com"
+                value={this.state.email}
+                onChange={this.handleEmailChange}
+              />
+            </div>
+          </div>
+          <button
+            className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded"
+            onClick={this.togglePage}
+          >
+            Back
+          </button>
           <input
-            type="text"
-            placeholder="Name"
-            required
-            value={this.state.name}
-            onChange={this.handleNameChange}
+            className="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 ml-4 border border-blue-darker rounded"
+            type="submit"
+            value="Add me to the list!"
           />
-          <input
-            type="text"
-            type="email"
-            required
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleEmailChange}
-          />
-          <button onClick={this.togglePage}>Back</button>
-          <input type="submit" value="Add me to the list!" />
         </form>
       </React.Fragment>
     );
@@ -115,12 +156,15 @@ class SignupForm extends React.Component {
 
   render() {
     const onFirstPage = this.state.onFirstPage;
+    let page = null;
 
     if (onFirstPage) {
-      return this.renderFirstPage();
+      page = this.renderFirstPage();
     } else {
-      return this.renderSecondPage();
+      page = this.renderSecondPage();
     }
+
+    return <div className="bg-white w-2/5 p-8 m-8 mt-32 rounded">{page}</div>;
   }
 }
 

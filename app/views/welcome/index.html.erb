@@ -1,6 +1,8 @@
-<% if flash[:notice] %>
-  <div class="notice"><%= flash[:notice] %></div>
-<% end %>
-<h1>Monthly opportunities to meet more locals</h1>
-<p>Join in!</p>
-<%= react_component("SignupForm",{}) %>
+<div class="w-screen">
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+  <div class="form-wrapper">
+    <%= react_component("SignupForm",{}) %>
+  </div>
+</div>
