@@ -9,6 +9,8 @@ services:
   web:
     env_file:
       - .env.dev-docker
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=webpacker
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -40,10 +42,24 @@ services:
     links:
       - postgres
       - redis
+  webpack:
+    env_file:
+      - .env.dev-docker
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: ./bin/webpack-dev-server
+    volumes:
+      - .:/app
+      - bundler_gems:/usr/local/bundle/
+      - yarn_cache:/usr/local/share/.cache/yarn/v4/
   redis:
     image: redis
     ports:
       - 6379
+      - "3035:3035"
     volumes:
       - redis:/data
 
