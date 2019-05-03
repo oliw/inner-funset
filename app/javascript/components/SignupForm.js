@@ -46,19 +46,23 @@ class SignupForm extends React.Component {
   renderFirstPage() {
     return (
       <React.Fragment>
-        <h1>Monthly opportunities to meet more locals</h1>
+        <h1 className="mb-4">Monthly opportunities to meet more locals</h1>
 
         <form>
-          <div>
-            <label>
+          <div className="mb-4">
+            <label
+              className="block text-grey-darker text-sm font-bold mb-2"
+              for="username"
+            >
               How would you describe yourself to a neighbor?
-              <textarea
-                value={this.state.aboutMe}
-                required
-                onChange={this.handleAboutMeChange}
-                placeholder="How would you describe yourself to a neighbor"
-              />
             </label>
+            <textarea
+              value={this.state.aboutMe}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
+              required
+              onChange={this.handleAboutMeChange}
+              placeholder="How would you describe yourself to a neighbor"
+            />
           </div>
           <div>
             <p>What would you prefer to grab?</p>
@@ -81,7 +85,7 @@ class SignupForm extends React.Component {
           </div>
         </form>
         <button
-          className="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 border border-blue-darker rounded"
+          className="mt-4 bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 border border-blue-darker rounded"
           onClick={this.togglePage}
         >
           Continue
@@ -93,7 +97,7 @@ class SignupForm extends React.Component {
   renderSecondPage() {
     return (
       <React.Fragment>
-        <h1>Nice! How it'll work</h1>
+        <h1 className="mb-4">Nice! How it'll work</h1>
         <p>
           Once a month, we'll start an email thread between you and one or two
           inner sunset neighbors.
