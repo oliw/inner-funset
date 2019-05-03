@@ -1,13 +1,6 @@
-<h1>Welcome</h1>
-
 <% if flash[:notice] %>
   <div class="notice"><%= flash[:notice] %></div>
 <% end %>
-
-<p>Join us!</p>
-<%= form_for @neighbor, url: welcome_index_path do |neighbor_form| %>
-  <%= neighbor_form.text_field :name, placeholder: "Name" %>
-  <%= neighbor_form.email_field :email, placeholder: "Email" %>
-  <%= neighbor_form.text_area :description, placeholder: "About Yourself" %>
-  <%= neighbor_form.submit %>
-<% end %>
+<h1>Monthly opportunities to meet more locals</h1>
+<p>Join in!</p>
+<%= react_component("SignupForm",{}) %>
