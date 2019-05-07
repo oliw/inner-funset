@@ -7,14 +7,17 @@ class SignupForm extends React.Component {
       onFirstPage: true,
       aboutMe: "",
       email: "",
-      name: ""
+      name: "",
+      preference: "No perference!",
+      submitted: false
     };
     this.togglePage = this.togglePage.bind(this);
     this.handleAboutMeChange = this.handleAboutMeChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePreferenceChange = this.handlePreferenceChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFirstSubmit = this.handleFirstSubmit.bind(this);
+    this.handleSecondSubmit = this.handleSecondSubmit.bind(this);
   }
 
   togglePage() {
@@ -23,8 +26,32 @@ class SignupForm extends React.Component {
     }));
   }
 
-  handleSubmit() {
-    console.log("Sending");
+  handleFirstSubmit(event) {
+    event.preventDefault();
+    this.togglePage();
+  }
+
+  handleSecondSubmit(event) {
+    event.preventDefault();
+    fetch("/api/v1/signups", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        neighbor: {
+          name: this.state.name,
+          email: this.state.email,
+          description: this.state.description,
+          preference: this.state.preference
+        }
+      })
+    }).then(success => {
+      if (success.ok) {
+        this.setState({ submitted: true });
+      }
+    });
   }
 
   handleAboutMeChange(event) {
@@ -48,11 +75,11 @@ class SignupForm extends React.Component {
       <React.Fragment>
         <h1 className="mb-4">Monthly opportunities to meet more locals</h1>
 
-        <form>
+        <form onSubmit={this.handleFirstSubmit}>
           <div className="mb-4">
             <label
               className="block text-grey-darker text-sm font-bold mb-2"
-              for="username"
+              htmlFor="username"
             >
               How would you describe yourself to a neighbor?
             </label>
@@ -65,17 +92,22 @@ class SignupForm extends React.Component {
             />
           </div>
           <div>
-            <p>What would you prefer to grab?</p>
+            <label
+              className="block text-grey-darker text-sm font-bold mb-2"
+              htmlFor="username"
+            >
+              What would you prefer to grab?
+            </label>
           </div>
-          <div class="inline-block relative w-64">
-            <select class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+          <div className="inline-block relative w-64">
+            <select className="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
               <option value="coffee">Coffee at Beanery</option>
               <option value="beer">Drinks at the Shamrock</option>
               <option value="any">No preference!</option>
             </select>
-            <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+            <div className="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
               <svg
-                class="fill-current h-4 w-4"
+                className="fill-current h-4 w-4"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
               >
@@ -83,13 +115,12 @@ class SignupForm extends React.Component {
               </svg>
             </div>
           </div>
+          <input
+            className="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 ml-4 border border-blue-darker rounded"
+            type="submit"
+            value="Continue"
+          />
         </form>
-        <button
-          className="mt-4 bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 border border-blue-darker rounded"
-          onClick={this.togglePage}
-        >
-          Continue
-        </button>
       </React.Fragment>
     );
   }
@@ -107,12 +138,12 @@ class SignupForm extends React.Component {
           We won't share your email address with anyone, even the neighbors you
           match with. You can decide how much you share.
         </p>
-        <form className="mt-8" onSubmit={this.handleSubmit}>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <form className="mt-8" onSubmit={this.handleSecondSubmit}>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-first-name"
+                className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+                htmlFor="grid-first-name"
               >
                 Name
               </label>
@@ -125,10 +156,10 @@ class SignupForm extends React.Component {
                 onChange={this.handleNameChange}
               />
             </div>
-            <div class="w-full md:w-1/2 px-3">
+            <div className="w-full md:w-1/2 px-3">
               <label
-                class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                for="grid-last-name"
+                className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+                htmlFor="grid-last-name"
               >
                 Email
               </label>
@@ -158,11 +189,24 @@ class SignupForm extends React.Component {
     );
   }
 
+  renderConfirmationPage() {
+    return (
+      <>
+        <h1>All done!</h1>
+        <p>Check your inbox for an email confirming you're on the list.</p>
+        <p>Thanks and tell a neighbor about InnerFunset!</p>
+      </>
+    );
+  }
+
   render() {
+    const submitted = this.state.submitted;
     const onFirstPage = this.state.onFirstPage;
     let page = null;
 
-    if (onFirstPage) {
+    if (submitted) {
+      page = this.renderConfirmationPage();
+    } else if (onFirstPage) {
       page = this.renderFirstPage();
     } else {
       page = this.renderSecondPage();

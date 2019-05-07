@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   resources :welcome, only: %i(show create)
 
   get '/unsubscribe/:token', to: 'unsubscribe#perform', as: 'unsubscribe'
+
+  namespace "api" do
+    namespace "v1" do
+      resources :signups, only: [:create]
+    end
+  end
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   mount Sidekiq::Web => '/sidekiq'
