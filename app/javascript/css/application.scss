@@ -14,9 +14,16 @@
  *= require_self
  */
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  height: 100%;
+  min-height: 100%;
   background-image: url("../images/judah.jpg");
+  // background-size: contain;
+  // background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
 }

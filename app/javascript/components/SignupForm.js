@@ -73,12 +73,14 @@ class SignupForm extends React.Component {
   renderFirstPage() {
     return (
       <React.Fragment>
-        <h1 className="mb-4">Monthly opportunities to meet more locals</h1>
+        <h1 className="text-5xl sm:text-3xl mb-4">
+          Monthly opportunities to meet more locals
+        </h1>
 
         <form onSubmit={this.handleFirstSubmit}>
           <div className="mb-4">
             <label
-              className="block text-grey-darker text-sm font-bold mb-2"
+              className="block text-grey-darker text-2xl lg:text-sm font-bold mb-2"
               htmlFor="username"
             >
               How would you describe yourself to a neighbor?
@@ -93,7 +95,7 @@ class SignupForm extends React.Component {
           </div>
           <div>
             <label
-              className="block text-grey-darker text-sm font-bold mb-2"
+              className="block text-grey-darker text-2xl lg:text-sm font-bold mb-2"
               htmlFor="username"
             >
               What would you prefer to grab?
@@ -129,17 +131,17 @@ class SignupForm extends React.Component {
     return (
       <React.Fragment>
         <h1 className="mb-4">Nice! How it'll work</h1>
-        <p>
+        <p class="text-base">
           Once a month, we'll start an email thread between you and one or two
           inner sunset neighbors.
         </p>
-        <p>
+        <p class="text-base">
           We don't like spam, and you can unsubscribe whenever you feel like it.
           We won't share your email address with anyone, even the neighbors you
           match with. You can decide how much you share.
         </p>
         <form className="mt-8" onSubmit={this.handleSecondSubmit}>
-          <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="flex flex-wrap flex-col lg:flex-row -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
@@ -212,7 +214,18 @@ class SignupForm extends React.Component {
       page = this.renderSecondPage();
     }
 
-    return <div className="bg-white w-2/5 p-8 m-8 mt-32 rounded">{page}</div>;
+    return (
+      <div>
+        <div className="flex w-full justify-center">
+          <div className="bg-white p-2 rounded rounded-t-none">
+            <h1 className="text-5xl lg:text-5xl font-amatic">Inner Funset</h1>
+          </div>
+        </div>
+        <div className="bg-white w-3/4 m-auto mt-8 lg:mt-16 lg:w-2/5 p-8 lg:m-8 lg:mt-16 rounded">
+          {page}
+        </div>
+      </div>
+    );
   }
 }
 
