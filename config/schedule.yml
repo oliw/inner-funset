@@ -1,3 +1,7 @@
 keep_alive_worker:
   cron: "*/5 * * * *"
   class: "KeepAliveWorker"
+
+find_matches_worker:
+  cron: "0 0 1 1 *"
+  class: "FindMatchesWorker"
