@@ -73,14 +73,14 @@ class SignupForm extends React.Component {
   renderFirstPage() {
     return (
       <React.Fragment>
-        <h1 className="text-5xl sm:text-3xl mb-4">
+        <h1 className="text-2xl sm:text-3xl mb-4">
           Monthly opportunities to meet more locals
         </h1>
 
         <form onSubmit={this.handleFirstSubmit}>
           <div className="mb-4">
             <label
-              className="block text-grey-darker text-2xl lg:text-sm font-bold mb-2"
+              className="block text-grey-darker text-m lg:text-sm font-bold mb-2"
               htmlFor="username"
             >
               How would you describe yourself to a neighbor?
@@ -95,13 +95,13 @@ class SignupForm extends React.Component {
           </div>
           <div>
             <label
-              className="block text-grey-darker text-2xl lg:text-sm font-bold mb-2"
+              className="block text-grey-darker text-m lg:text-sm font-bold mb-2"
               htmlFor="username"
             >
               What would you prefer to grab?
             </label>
           </div>
-          <div className="inline-block relative w-64">
+          <div className="inline-block relative w-full">
             <select className="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
               <option value="coffee">Coffee at Beanery</option>
               <option value="beer">Drinks at the Shamrock</option>
@@ -117,11 +117,13 @@ class SignupForm extends React.Component {
               </svg>
             </div>
           </div>
-          <input
-            className="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 ml-4 border border-blue-darker rounded"
-            type="submit"
-            value="Continue"
-          />
+          <div className="inline-block py-2">
+            <input
+              className="bg-blue hover:bg-blue-dark text-white font-bold py-2 border border-blue-darker rounded"
+              type="submit"
+              value="Continue"
+            />
+          </div>
         </form>
       </React.Fragment>
     );
@@ -175,17 +177,19 @@ class SignupForm extends React.Component {
               />
             </div>
           </div>
-          <button
-            className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded"
-            onClick={this.togglePage}
-          >
-            Back
-          </button>
-          <input
-            className="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 ml-4 border border-blue-darker rounded"
-            type="submit"
-            value="Add me to the list!"
-          />
+          <div>
+            <button
+              className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded"
+              onClick={this.togglePage}
+            >
+              Back
+            </button>
+            <input
+              className="bg-blue hover:bg-blue-dark text-white text-s font-bold py-2 px-4 ml-2 border border-blue-darker rounded"
+              type="submit"
+              value="Add me!"
+            />
+          </div>
         </form>
       </React.Fragment>
     );
