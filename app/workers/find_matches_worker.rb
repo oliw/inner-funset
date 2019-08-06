@@ -17,6 +17,9 @@ class FindMatchesWorker
       match.neighbors << neighbor
     end
     match.save!
+    match.neighbors.each do |neighbor|
+      MatchMailer.with(match: match, neighbor: neighbor).match.deliver_now
+    end
    end
   end
 end
