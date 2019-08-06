@@ -2,15 +2,49 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700&display=swap" rel="stylesheet">
     <style>
       /* Email styles need to be inline */
+      body {
+        background-color: white;
+        font-family: 'arial', 'sans-serif';
+      }
+      .font-amatic {
+        font-family: 'Amatic SC'
+      }
+      .large {
+        font-size: 48px;
+      }
+      .small {
+        font-size: 12px;
+      }
+      a {
+        color: blue;
+        text-decoration: none; /* no underline */
+      }
+      .footer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .footer-item {
+        margin-right: 8px;
+      }
     </style>
   </head>
 
   <body>
+    <h1 class="font-amatic large">Inner Funset</h1>
     <%= yield %>
     <footer>
-      <%= link_to "Unsubscribe", unsubscribe_path(token: @neighbor.token) %>
+      <div class="footer">
+        <div class="footer-item small">
+          <p>Inner Funset © 2019</p>
+        </div>
+        <div class='footer-item small'>
+          <%= link_to "Unsubscribe", unsubscribe_path(token: @neighbor.token) %>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

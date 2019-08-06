@@ -3,6 +3,6 @@ class WelcomeMailer < ApplicationMailer
 
   def welcome_email
     @neighbor = params[:neighbor]
-    mail(to: @neighbor.email, subject: 'Welcome to My Awesome Site')
+    mail(to: @neighbor.email, subject: 'Welcome to Inner Funset')
   end
 end
